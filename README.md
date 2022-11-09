@@ -9,9 +9,10 @@ If found, window.WEBPACK_GRABBER will be defined with the following methods:
 Offers methods to find modules by props, name, displayName or code and to find module ids by source code.
 Also accounts for mangled ("obfuscated") exports.
 
-Should technically work on any site using webpack, confirmed working on Discord, Twitter and even Github (however for Github see below sentence) 
+Should technically work on any site using webpack, confirmed working on Discord, Twitter and even Github
 
-Note that some sites have webpack that doesn't expose some things like the cache so it won't work fully there
+Note that some sites have webpack that doesn't expose the cache.
+In this case, WebpackGrabber will build the cache itself by importing every module. This may have side effects.
 
 ## Installation
 
