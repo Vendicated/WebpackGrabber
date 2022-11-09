@@ -45,7 +45,7 @@ Object.defineProperty(Function.prototype, "m", {
                     return values(this.cache);
                 },
                 moduleValues() {
-                    return values(this.cache);
+                    return values(this.modules);
                 },
 
                 find(filter) {
