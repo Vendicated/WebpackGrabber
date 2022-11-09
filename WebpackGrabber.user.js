@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            WebpackGrabber
 // @description     Grabs the webpack_require instance on any site that uses webpack and offers methods to find modules
-// @version         1.0.0
+// @version         1.0.1
 // @author          Vendicated (https://github.com/Vendicated)
 // @namespace       https://github.com/Vendicated/WebpackGrabber
 // @license         GPL-3.0
@@ -13,10 +13,6 @@
 const values = o => (Array.isArray(o) ? o : Object.values(o));
 
 Object.defineProperty(Function.prototype, "m", {
-    get() {
-        return this._WEBPACK_GRABBER_m;
-    },
-
     set(v) {
         const source = this.toString();
         if (
@@ -158,9 +154,13 @@ Object.defineProperty(Function.prototype, "m", {
             );
         } else {
             // huh not webpack_require
-            this._WEBPACK_GRABBER_m = v;
+            Object.defineProperty(this, "m", {
+              value: v,
+              configurable: true,
+              writable: true,
+              enumerable: true
+            });
         }
     },
     configurable: true,
 });
-
