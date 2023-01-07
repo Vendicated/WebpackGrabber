@@ -5,7 +5,7 @@
 // @author          Vendicated (https://github.com/Vendicated)
 // @namespace       https://github.com/Vendicated/WebpackGrabber
 // @license         GPL-3.0
-// @match           *://*/*
+// @include *
 // @grant           none
 // @run-at          document-start
 // ==/UserScript==
