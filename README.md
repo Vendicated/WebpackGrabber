@@ -16,4 +16,5 @@ In this case, WebpackGrabber will build the cache itself by importing every modu
 
 ## Installation
 
-Install a Userscript manager, I recommend [ViolentMonkey](https://violentmonkey.github.io/) and just click View Raw 
+- Install a Userscript manager, I recommend [ViolentMonkey](https://violentmonkey.github.io/)
+- [Download the UserScript](https://github.com/Vendicated/WebpackGrabber/raw/main/WebpackGrabber.user.js) - Your UserScript manager should automatically prompt to install it, if not, just import it manually 
