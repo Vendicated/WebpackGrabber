@@ -11,9 +11,6 @@ If found, window.WEBPACK_GRABBER will be defined with the following methods:
 Offers methods to find modules by props, name, displayName or code and to find module ids by source code.
 Also accounts for mangled ("obfuscated") exports.
 
-Note that some sites have webpack that doesn't expose the cache.
-In this case, WebpackGrabber will build the cache itself by importing every module. This may have side effects.
-
 ## Installation
 
 - Install a Userscript manager, I recommend [ViolentMonkey](https://violentmonkey.github.io/)
