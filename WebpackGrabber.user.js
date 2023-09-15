@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            WebpackGrabber
 // @description     Grabs the webpack_require instance on any site that uses webpack and offers methods to find modules
-// @version         1.0.2
+// @version         1.0.3
 // @author          Vendicated (https://github.com/Vendicated)
 // @namespace       https://github.com/Vendicated/WebpackGrabber
 // @license         GPL-3.0
@@ -11,6 +11,26 @@
 // ==/UserScript==
 
 const values = o => (Array.isArray(o) ? o : Object.values(o));
+
+function extractPrivateCache(wreq) {
+    let cache = null;
+    const sym = Symbol("wpgrabber.extract");
+
+    Object.defineProperty(Object.prototype, sym, {
+        get() {
+            cache = this;
+            return { exports: {} };
+        },
+        set() { },
+        configurable: true,
+    })
+
+    wreq(sym);
+    delete Object.prototype[sym];
+    if (cache) delete cache[sym];
+
+    return cache;
+}
 
 Object.defineProperty(Function.prototype, "m", {
     set(v) {
@@ -23,16 +43,7 @@ Object.defineProperty(Function.prototype, "m", {
             window.WEBPACK_GRABBER = {
                 require: this,
                 get cache() {
-                    if (!this.require.c) {
-                      const cache = this.require.c = {};
-                      for (const id in this.modules) {
-                        cache[id] = {
-                          id,
-                          loaded: true,
-                          exports: this.require(id)
-                        };
-                      }
-                    }
+                    this.require.c ??= extractPrivateCache(this.require);
                     return this.require.c;
                 },
                 get modules() {
